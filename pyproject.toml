@@ -14,6 +14,7 @@ flask-graphql = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.1.3"
+pytest-cov = "^2.7.1"
 
 [build-system]
 requires = ["poetry>=0.12"]
