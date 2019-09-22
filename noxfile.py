@@ -1,7 +1,7 @@
 import nox
 
 
-nox.options.sessions = "lint", "tests"
+nox.options.sessions = "lint", "pytype", "tests"
 
 package = "graphene_flask_tutorial"
 locations = "src", "tests", "noxfile.py"
@@ -13,6 +13,13 @@ def lint(session):
     session.install("flake8", "flake8-bugbear", "flake8-import-order", "black")
     session.run("black", "--check", *locations)
     session.run("flake8", *locations)
+
+
+@nox.session(python="3.7")
+def pytype(session):
+    """Type-check using pytype."""
+    session.install("pytype")
+    session.run("pytype", "--disable=import-error", *locations)
 
 
 @nox.session(python="3.7")
