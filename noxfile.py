@@ -2,6 +2,14 @@ import nox
 
 
 package = "graphene_flask_tutorial"
+locations = "src", "tests", "noxfile.py"
+
+
+@nox.session(python="3.7")
+def lint(session):
+    """Lint using flake8."""
+    session.install("flake8", "flake8-bugbear", "flake8-import-order")
+    session.run("flake8", *locations)
 
 
 @nox.session(python="3.7")
