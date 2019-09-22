@@ -1,6 +1,8 @@
 import nox
 
 
+nox.options.sessions = "lint", "tests"
+
 package = "graphene_flask_tutorial"
 locations = "src", "tests", "noxfile.py"
 
@@ -19,3 +21,10 @@ def tests(session):
     env = {"VIRTUAL_ENV": session.virtualenv.location}
     session.run("poetry", "install", external=True, env=env)
     session.run("pytest", f"--cov={package}", *session.posargs)
+
+
+@nox.session(python="3.7")
+def black(session):
+    """Run black code formatter."""
+    session.install("black")
+    session.run("black", *locations)
